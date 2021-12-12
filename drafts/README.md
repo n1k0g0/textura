@@ -1,1 +1,1 @@
-#### Drafts storage
+Code drafts folder
