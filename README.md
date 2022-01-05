@@ -2,10 +2,10 @@
 
 Textura text analysis tool working project
 
-#### Usage
+### Usage
 
-python run.py [-h] [filename]
+`python run.py [-h] [filename]`
 
 Can be piped to as well:
 
-python run.py
+`python run.py`
