@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
+import nltk
 from nltk.tokenize import sent_tokenize
 from ..preprocessing import basic
 import statistics
+nltk.download('punkt')
 
 
 def avg_sentence_length(text):
