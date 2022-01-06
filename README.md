@@ -60,6 +60,10 @@ pip install -r requirements.txt
 
 `python run.py <path/to/textfile>`
 
+Для получения подсказок необходим параметр `-h`:
+
+`python run.py -h`
+
 ## После использования
 
 #### Отключение введенных настроек:
