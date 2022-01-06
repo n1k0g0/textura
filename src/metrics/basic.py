@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from nltk.tokenize import sent_tokenize
 from ..preprocessing import basic
 import statistics
