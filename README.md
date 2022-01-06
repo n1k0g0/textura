@@ -2,41 +2,41 @@
 
 Textura -- инструмент комплексного анализа текста по дескриптивным и предиктивным показателям
 
-### Установка
+## Установка
 
-#### Mac/Linux
+### Mac/Linux
 
-1. Загрузить .ZIP архив:
+#### 1. Загрузить .ZIP архив:
 
 (**Code** -> **ZIP**)
 
-2. Открыить загруженную папку в командной строке:
+#### 2. Открыить загруженную папку в командной строке:
 
 `cd .../<Downloads Folder>/textura-main`
 
-3. Подключить зависимости
+#### 3. Подключить зависимости
 
-`python3 -m pip install --user --upgrade pip`
+`python3 -m pip install --user --upgrade pip
 
-`python3 -m pip install --user virtualenv`
+python3 -m pip install --user virtualenv
 
-`python3 -m venv textura_env`
+python3 -m venv textura_env
 
-`source textura_env/bin/activate`
+source textura_env/bin/activate
 
-`pip install -r requirements.txt`
+pip install -r requirements.txt`
 
-#### Windows
+### Windows
 
-1. Загрузить .ZIP архив:
+#### 1. Загрузить .ZIP архив:
 
 (**Code** -> **ZIP**)
 
-2. Открыить загруженную папку в командной строке:
+#### 2. Открыить загруженную папку в командной строке:
 
 `cd ...\<Downloads Folder>\textura-main`
 
-3. Подключить зависимости
+#### 3. Подключить зависимости
 
 `py -m pip install --upgrade pip`
 
@@ -48,7 +48,7 @@ Textura -- инструмент комплексного анализа текс
 
 `pip install -r requirements.txt`
 
-### Запуск
+## Запуск
 
 `python run.py`
 
@@ -56,7 +56,7 @@ Textura -- инструмент комплексного анализа текс
 
 `python run.py <path/to/textfile>`
 
-### После использования
+## После использования
 
 Отключение введенных настроек:
 
