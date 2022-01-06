@@ -32,7 +32,7 @@ pip install -r requirements.txt
 
 #### 1. Загрузить .ZIP архив:
 
-(**Code** -> **ZIP**)
+**Code** -> **Download ZIP**
 
 #### 2. Открыить загруженную папку в командной строке:
 
