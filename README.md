@@ -26,6 +26,8 @@ python3 -m venv textura_env
 source textura_env/bin/activate
 
 pip install -r requirements.txt
+
+deactivate
 ```
 
 ### Windows
@@ -50,11 +52,25 @@ python -m venv textura_env
 .\textura_env\Scripts\activate
 
 pip install -r requirements.txt
+
+deactivate
 ```
 
 ## II. Запуск
 
-`python run.py`
+### Mac/Linux
+
+```
+source textura_env/bin/activate
+python run.py
+```
+
+### Windows
+
+```
+.\textura_env\Scripts\activate
+python run.py
+```
 
 Также доступен ввод параметра-пути до анализируемого текста:
 
