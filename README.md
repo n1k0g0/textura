@@ -16,7 +16,8 @@ Textura -- инструмент комплексного анализа текс
 
 #### 3. Подключить зависимости
 
-`python3 -m pip install --user --upgrade pip
+```
+python3 -m pip install --user --upgrade pip
 
 python3 -m pip install --user virtualenv
 
@@ -24,7 +25,8 @@ python3 -m venv textura_env
 
 source textura_env/bin/activate
 
-pip install -r requirements.txt`
+pip install -r requirements.txt
+```
 
 ### Windows
 
@@ -38,15 +40,17 @@ pip install -r requirements.txt`
 
 #### 3. Подключить зависимости
 
-`py -m pip install --upgrade pip`
+```
+py -m pip install --upgrade pip
 
-`py -m pip install --user virtualenv`
+py -m pip install --user virtualenv
 
-`py -m venv textura_env`
+py -m venv textura_env
 
-`.\textura_env\Scripts\activate`
+.\textura_env\Scripts\activate
 
-`pip install -r requirements.txt`
+pip install -r requirements.txt
+```
 
 ## Запуск
 
