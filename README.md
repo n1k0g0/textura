@@ -41,11 +41,11 @@ pip install -r requirements.txt
 #### 3. Подключить зависимости
 
 ```
-py -m pip install --upgrade pip
+python -m pip install --upgrade pip
 
-py -m pip install --user virtualenv
+python -m pip install --user virtualenv
 
-py -m venv textura_env
+python -m venv textura_env
 
 .\textura_env\Scripts\activate
 
