@@ -4,7 +4,7 @@ from src.metrics import basic
 
 class Manager:
     def __init__(self, filename):
-        self.text = open(filename, "r").read()
+        self.text = open(filename, encoding='utf-8', mode="r").read()
 
     def preprocess(self, text):
         pass
