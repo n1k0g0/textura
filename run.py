@@ -6,6 +6,7 @@ import json
 from src.validation.input_file_validation import *
 from src.manager import Manager
 
+
 if __name__ == "__main__":
     command = ""
     parser = argparse.ArgumentParser(description='Get average sentence length from a file.')
@@ -43,7 +44,7 @@ if __name__ == "__main__":
         elif command == "analyse":
             results = manager.analyse()
             print()
-            sys.stdout.write(json.dumps(results))
+            sys.stdout.write(json.dumps(results, ensure_ascii=False))
             print()
         elif command == "preprocess":
             pass
