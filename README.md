@@ -6,11 +6,9 @@
 
 ### Mac/Linux
 
-1. Загрузить .ZIP архив:
+1. Загрузить .ZIP архив: **Code** -> **Download ZIP**
 
-**Code** -> **Download ZIP**
-
-2. Перейти в папку в терминале:
+2. Перейти в загруженную папку в терминале:
 
 `cd .../<Downloads Folder>/textura-main`
 
@@ -22,20 +20,17 @@
 
 ### Windows
 
-#### 1. Загрузить .ZIP архив:
+1. Загрузить .ZIP архив: **Code** -> **Download ZIP**
 
-**Code** -> **Download ZIP**
-
-#### 2. Перейти в папку в терминале:
+2. Перейти в загруженную папку в терминале:
 
 `cd .../<Downloads Folder>/textura-main`
 
-#### 3. Ввести в терминале:
+3. Ввести в терминале:
 
-`sh mac-install.sh`
+`sh windows-install.sh`
 
-`sh mac-run.sh`
-
+`sh windows-run.sh`
 
 ## Использование
 
