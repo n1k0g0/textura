@@ -17,6 +17,7 @@
 #### 3. Ввести в терминале:
 
 `sh mac-install.sh`
+
 `sh mac-run.sh`
 
 ### Windows
@@ -32,6 +33,7 @@
 #### 3. Ввести в терминале:
 
 `sh mac-install.sh`
+
 `sh mac-run.sh`
 
 
