@@ -22,15 +22,15 @@
 
 1. Загрузить .ZIP архив: **Code** -> **Download ZIP**
 
-2. Перейти в загруженную папку в терминале:
+2. Перейти в загруженную папку в командной строке:
 
 `cd .../<Downloads Folder>/textura-main`
 
-3. Ввести в терминале:
+3. Скопировать и вставить в командной строке:
 
-`sh windows-install.sh`
+`python -m pip install --upgrade pip && python -m pip install --user virtualenv && python -m venv textura_env && .\textura_env\Scripts\activate && pip install -r requirements.txt && deactivate`
 
-`sh windows-run.sh`
+`.\textura_env\Scripts\activate && python run.py && deactivate`
 
 ## Использование
 
