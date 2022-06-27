@@ -31,9 +31,9 @@ if __name__ == "__main__":
             #print(filename)
         manager = Manager(filename)
 
-        print("\nВведите команду: descriptive | exit")
+        print("\nВведите команду: descriptive | spelling | exit")
 
-        VALID_COMMANDS = {"descriptive", "exit"}
+        VALID_COMMANDS = {"descriptive", "spelling", "exit"}
         command = input()
 
         while command not in VALID_COMMANDS:
@@ -43,6 +43,11 @@ if __name__ == "__main__":
             exit()
         elif command == "descriptive":
             results = manager.analyse()
+            print()
+            sys.stdout.write(json.dumps(results, ensure_ascii=False))
+            print()
+        elif command == "spelling":
+            results = manager.analyse_spelling()
             print()
             sys.stdout.write(json.dumps(results, ensure_ascii=False))
             print()

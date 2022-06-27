@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from src.metrics import basic
+from src.metrics import basic, spelling
 
 
 class Manager:
@@ -11,6 +11,9 @@ class Manager:
 
     def analyse(self):
         return basic.avg_sentence_length(self.text)
+
+    def analyse_spelling(self):
+        return spelling.count_spelling_mistakes(self.text)
 
     def postprocess(self, text, previous_results):
         pass
