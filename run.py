@@ -31,9 +31,9 @@ if __name__ == "__main__":
             #print(filename)
         manager = Manager(filename)
 
-        print("\nВведите команду: analyse | exit")
+        print("\nВведите команду: descriptive | exit")
 
-        VALID_COMMANDS = {"analyse", "exit"}
+        VALID_COMMANDS = {"descriptive", "exit"}
         command = input()
 
         while command not in VALID_COMMANDS:
@@ -41,7 +41,7 @@ if __name__ == "__main__":
             command = input()
         if command == "exit":
             exit()
-        elif command == "analyse":
+        elif command == "descriptive":
             results = manager.analyse()
             print()
             sys.stdout.write(json.dumps(results, ensure_ascii=False))
