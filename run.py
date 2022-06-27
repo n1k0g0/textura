@@ -6,7 +6,7 @@ import json
 from src.validation.input_file_validation import *
 from src.manager import Manager
 import psycopg2
-from hehehd import creds
+from src.hehehd import creds
 
 
 
@@ -25,11 +25,7 @@ if __name__ == "__main__":
     first_cycle = True
     while command != "exit":
         conn = psycopg2.connect(
-            host="localhost",
-            port="5433",
-            database="texturadb",
-            user="postgres",
-            password=creds
+            **creds
         )
         filename = ""
         if not len(sys.argv) > 1 or not first_cycle:
