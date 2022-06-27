@@ -13,10 +13,11 @@ def avg_sentence_length(text):
     sentence_list = sent_tokenize(text.strip())
     word_list = [basic.remove_punctuation_and_tokenize(words) for words in sentence_list]
     length_list = [len(word) for word in word_list]
+    sentence_length_list = [len(basic.remove_punctuation_and_tokenize(sentence)) for sentence in sentence_list]
     return {
-        "Средняя длина предложения": float(format(statistics.mean(length_list), '.2f')),
+        "Средняя длина предложения": float(format(statistics.mean(sentence_length_list), '.2f')),
         "Число предложений": len(sentence_list),
-        "Максмальная длина": max(length_list),
+        "Максимальная длина": max(length_list),
         "Минимальная длина": min(length_list),
         "Среднеквадратическое отклонение": float(format(statistics.stdev(length_list), '.2f')),
     }
