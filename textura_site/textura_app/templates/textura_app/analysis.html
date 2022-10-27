@@ -1,0 +1,51 @@
+{% extends 'textura_app/base.html' %}
+
+{% block title %}Show Corpora | {{ block.super }}{% endblock title %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-md-12">
+
+        {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+
+        <h2>Загруженные тексты</h2>
+        <a class="btn btn-info mt-2 mb-2" href="{% url 'upload_text' %}" role="button">Upload</a>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Название</th>
+                    <th scope="col">Автор</th>
+                    <th scope="col">Категория</th>
+                    <th scope="col">Век создания</th>
+                    <th scope="col">Действие</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for text in texts %}
+                <tr>
+                    <td>{{ text.title }}</td>
+                    <td>{{ text.author }}</td>
+                    <td>{{ text.category }}</td>
+                    <td>{{ text.time_period }}</td>
+                    
+                    <td class="form-inline">
+                        <a class="btn btn-primary mr-2" href="/media/texts/lotr.txt" target="_blank" download role="button">Выгрузить</a>
+                        <form action="{% url 'delete_text' text.id %}" method="POST">
+                            {% csrf_token %}
+                            <input type="submit" role="button" class="btn btn-danger" value="Удалить" onclick="return confirm('Удалить текст {{ text.title }}?')">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}

@@ -1,23 +1,27 @@
 from django import forms
-from .models import TextData, Text
+from .models import CorporaEntityData, UploadedText
  
  
 # creating a form
-class TextForm(forms.ModelForm):
- 
+class CorporaEntityForm(forms.ModelForm):
     # create meta class
     class Meta:
         # specify model to be used
-        model = TextData
+        model = CorporaEntityData
  
         # specify fields to be used
         fields = [
             "title",
             "time_period",
-            "text_type"
+            "category"
         ]
 
-class AddTextForm(forms.ModelForm):
+#### TODO: добавить прочие поля типологии
+class UploadTextForm(forms.ModelForm):
     class Meta:
-        model = Text
-        fields = ('title', 'author', 'category', 'time_period', 'file', 'avg_sentence_length')
+        model = UploadedText
+        fields = ['title', 'file']
+        labels = {
+        "title": "Название",
+        "file": "Файл"
+        }

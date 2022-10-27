@@ -5,12 +5,12 @@ from django.db import models
 from django.db import models
   
 # declare a new model with a name 
-class TextData(models.Model):
+class CorporaEntityData(models.Model):
  
     # fields of the model
     title = models.CharField(max_length = 200)
     time_period = models.CharField(max_length = 50)
-    text_type = models.TextField()
+    category = models.TextField()
     avg_sentence_length = models.IntegerField() 
 
     class Meta:
@@ -21,17 +21,17 @@ class TextData(models.Model):
         return self.title
 
 
-class Text(models.Model):
-    title = models.CharField(max_length=100)
-    author = models.CharField(max_length=100)
-    time_period = models.CharField(max_length = 50)
-    category = models.CharField(max_length=50)
+class UploadedText(models.Model):
     file = models.FileField(upload_to='texts/')
-    avg_sentence_length = models.IntegerField() 
+    title = models.CharField(max_length=100, default=None, blank=True, null=True)
+    author = models.CharField(max_length=100, default=None, blank=True, null=True)
+    time_period = models.CharField(max_length = 50, default=None, blank=True, null=True)
+    category = models.CharField(max_length=50, default=None, blank=True, null=True)
+    avg_sentence_length = models.IntegerField(default=None, blank=True, null=True) 
 
     def delete(self, *args, **kwargs):
         self.file.delete()
-        super(Text, self).delete(*args, **kwargs)
+        super(UploadedText, self).delete(*args, **kwargs)
 
     def __str__(self):
         return self.title
