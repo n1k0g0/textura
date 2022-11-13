@@ -15,8 +15,7 @@
         </div>
         {% endfor %}
 
-        <h2>Загруженные тексты</h2>
-        <a class="btn btn-info mt-2 mb-2" href="{% url 'upload_text' %}" role="button">Upload</a>
+        <h2>Загруженный текст</h2>
         <table class="table">
             <thead class="thead-dark">
                 <tr>
@@ -36,13 +35,41 @@
                     <td>{{ text.time_period }}</td>
                     
                     <td class="form-inline">
-                        <a class="btn btn-primary mr-2" href="/media/texts/lotr.txt" target="_blank" download role="button">Выгрузить</a>
+                        <a class="btn btn-primary mr-2" href="media/{{ text.file }}" download role="button">Выгрузить</a>
                         <form action="{% url 'delete_text' text.id %}" method="POST">
                             {% csrf_token %}
                             <input type="submit" role="button" class="btn btn-danger" value="Удалить" onclick="return confirm('Удалить текст {{ text.title }}?')">
                         </form>
                     </td>
                 </tr>
+
+                
+                {% endfor %}
+            </tbody>
+        </table>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Ср длина предложения</th>
+                    <th scope="col">Максимальная длина предложения</th>
+                    <th scope="col">Средняя длина слов</th>
+                    <th scope="col">Стандартное отклонение</th>
+                    <th scope="col">Максимальная длина слов</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for text in texts %}
+                <tr>
+                    <td>{{ text.avg_sentence_length }} <br/> σ = {{text.avg_sentence_length_stdev}} <br/>{{text.avg_sentence_length_rank}}%</td>
+                    <td>{{ text.max_sentence_length }}</td>
+                    <td>{{ text.avg_word_length }}</td>
+                    <td>{{ text.avg_word_length_stdev }}</td>
+                    <td>{{ text.max_word_length }}</td>
+                    
+                    
+                </tr>
+
+                
                 {% endfor %}
             </tbody>
         </table>
