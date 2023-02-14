@@ -6,11 +6,20 @@
 <div class="row mt-4">
     <div class="col-md-8 offset-md-2">
         <h2>Загрузите файл .txt</h2>
-        <form method="POST" enctype="multipart/form-data">
+        <form method="POST" enctype="multipart/form-data" class="customForm">
             {% csrf_token %}
-            {{ form }}
+            {% for field in form %}
+                <div class="fieldWrapper">
+                    {{ field.errors }}
+                    {{ field.label_tag }} {{ field }}
+                    {% if field.help_text %}
+                    <p class="help">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
             <button type="submit" class="btn btn-primary">Анализировать</button>
         </form>
     </div>
 </div>
 {% endblock content %}
+

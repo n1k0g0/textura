@@ -1,5 +1,5 @@
 from django import forms
-from .models import CorporaEntityData, UploadedText
+from .models import CorporaEntityData, UploadedText, CorpusEntityData
 from django.core.exceptions import ValidationError
  
  
@@ -16,6 +16,20 @@ class CorporaEntityForm(forms.ModelForm):
             "time_period",
             "category"
         ]
+
+class CorpusEntityForm(forms.ModelForm):
+    # create meta class
+    class Meta:
+        # specify model to be used
+        model = CorpusEntityData
+ 
+        # specify fields to be used
+        fields = [
+            "title",
+            "time_period",
+            "category"
+        ]
+
 
 #### TODO: добавить прочие поля типологии
 class UploadTextForm(forms.ModelForm):

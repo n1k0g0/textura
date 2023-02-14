@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .metrics import PreprocessedText
 
-from .models import CorporaEntityData, UploadedText
-from .forms import CorporaEntityForm, UploadTextForm
+from .models import CorporaEntityData, UploadedText, CorpusEntityData
+from .forms import CorporaEntityForm, UploadTextForm, CorpusEntityForm
 
  
 def add_corpora_entity(request):
     context = {}
-    form = CorporaEntityForm(request.POST or None)
+    form = CorpusEntityForm(request.POST or None)
     if form.is_valid():
         form.save()
     context['form']= form
@@ -15,7 +15,7 @@ def add_corpora_entity(request):
 
 
 def show_corpora(request):
-    texts = CorporaEntityData.objects.all()[0:1000]
+    texts = CorpusEntityData.objects.all()[0:1000]
     return render(request, 'textura_app/show_corpora.html', {'texts': texts})
 
 
@@ -23,22 +23,39 @@ def analysis(request):
     texts = UploadedText.objects.all()
     for text in texts:
         preprocessed_text = PreprocessedText(text.file.name)
+        preprocessed_text.load_basics()
+        preprocessed_text.load_vocab()
+        preprocessed_text.load_complexity()
+        preprocessed_text.load_sentiment()
         
-        if text.avg_sentence_length == None:
-                text.avg_sentence_length = preprocessed_text.asl
-        if text.avg_sentence_length_stdev == None:
-                text.avg_sentence_length_stdev = preprocessed_text.asl_stdev
-        if text.avg_sentence_length_rank == None:
-                text.avg_sentence_length_rank = preprocessed_text.asl_rank
-        if text.max_sentence_length == None:
-                text.max_sentence_length = preprocessed_text.msl
+        text.avg_sentence_length = preprocessed_text.asl
+        text.avg_sentence_length_stdev = preprocessed_text.asl_stdev
+        text.avg_sentence_length_rank = preprocessed_text.asl_rank
+        text.max_sentence_length = preprocessed_text.msl
+        text.sentence_count = preprocessed_text.s_count 
 
-        if text.avg_word_length == None:
-                text.avg_word_length = preprocessed_text.awl
-        if text.avg_word_length_stdev == None:
-                text.avg_word_length_stdev = preprocessed_text.awl_stdev
-        if text.max_word_length == None:
-                text.max_word_length = preprocessed_text.mwl
+        text.avg_word_length = preprocessed_text.awl
+        text.avg_word_length_rank = preprocessed_text.awl_rank
+        text.avg_word_length_stdev = preprocessed_text.awl_stdev
+        text.max_word_length = preprocessed_text.mwl
+        text.word_count = preprocessed_text.w_count
+
+        text.avg_syl_per_word = preprocessed_text.asw
+
+
+        text.type_token_ratio = preprocessed_text.ttr
+        text.lexical_density = preprocessed_text.lex_den
+
+        text.hard_words_quantity = preprocessed_text.hwq
+        text.fres = preprocessed_text.fres
+        text.gunning_fog = preprocessed_text.gunning_fog
+        text.ari = preprocessed_text.ari
+        text.smog = preprocessed_text.smog
+        text.cli = preprocessed_text.cli
+
+        text.blanchefort_positive = preprocessed_text.blanchefort_positive
+        text.blanchefort_neutral = preprocessed_text.blanchefort_neutral
+        text.blanchefort_negative = preprocessed_text.blanchefort_negative
         
     return render(request, 'textura_app/analysis.html', {'texts': texts})
 
@@ -52,7 +69,6 @@ def upload_text(request):
         form = UploadTextForm(request.POST, request.FILES)
         
         if form.is_valid():
-
             form_mutable = form.save(commit=False)
             print(form_mutable.file.path)
             if form_mutable.title == None:
