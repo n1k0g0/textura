@@ -1,0 +1,137 @@
+{% extends 'textura_app/base.html' %}
+
+{% block title %}Text Analysis | {{ block.super }}{% endblock title %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-md-12">
+
+        {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+
+        <h2>Загруженный текст</h2>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Название</th>
+                    <th scope="col">Автор</th>
+                    <th scope="col">Категория</th>
+                    <th scope="col">Век создания</th>
+                    <th scope="col">Действие</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for text in texts %}
+                <tr>
+                    <td>{{ text.title }}</td>
+                    <td>{{ text.author }}</td>
+                    <td>{{ text.category }}</td>
+                    <td>{{ text.time_period }}</td>
+                    
+                    <td class="form-inline">
+                        <a class="btn btn-primary mr-2" href="media/{{ text.file }}" download role="button">Выгрузить</a>
+                        <form action="{% url 'delete_text' text.id %}" method="POST">
+                            {% csrf_token %}
+                            <input type="submit" role="button" class="btn btn-danger" value="Удалить" onclick="return confirm('Удалить текст {{ text.title }}?')">
+                        </form>
+                    </td>
+                </tr>
+
+                
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% for text in texts %}
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Ср. длина предложения</th>
+                    <th scope="col">Ср. длина слов</th>
+                    <th scope="col">Количество предложений</th>
+                    <th scope="col">Количество слов</th> 
+                    <th scope="col">Ср. кол-во слогов в словах</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="message"> {{ text.avg_sentence_length|floatformat:-2 }} <br/> σ = {{text.avg_sentence_length_stdev|floatformat:-2}} <br/>{{text.avg_sentence_length_rank|floatformat:-2}}%</td>
+                    <td> {{ text.avg_word_length|floatformat:-2 }} <br/> σ = {{text.avg_word_length_stdev|floatformat:-2}} <br/>{{text.avg_word_length_rank|floatformat:-2}}% </td>
+                    
+                    <td> {{ text.sentence_count }} </td>
+                    <td> {{ text.word_count }} </td>
+                    <td> {{ text.avg_syl_per_word|floatformat:-2 }} </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Коэф. лексического разнообразия</th>
+                    <th scope="col">Коэф. лексической плотности</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> {{ text.type_token_ratio|floatformat:-2 }} </td>
+                    <td> {{ text.lexical_density|floatformat:-2 }} </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Кол-во многосложных слов</th>
+                    <th scope="col">Индекс удобочитаемости</th>
+                    <th scope="col">FRES</th>
+                    <th scope="col">Gunning Fog</th>
+                    <th scope="col">SMOG</th>
+                    <th scope="col">CLI</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> {{ text.hard_words_quantity|floatformat:-2 }} </td>
+                    <td> {{ text.ari|floatformat:-2 }} </td>
+                    <td> {{ text.fres|floatformat:-2 }} </td>
+                    <td> {{ text.gunning_fog|floatformat:-2 }} </td>
+                    <td> {{ text.smog|floatformat:-2 }} </td>
+                    <td> {{ text.cli|floatformat:-2 }} </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Ср. позитивная оценка</th>
+                    <th scope="col">Ср. нейтральная оценка</th>
+                    <th scope="col">Ср. негативная оценка</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> {{ text.blanchefort_positive|floatformat:-2 }} </td>
+                    <td> {{ text.blanchefort_neutral|floatformat:-2 }} </td>
+                    <td> {{ text.blanchefort_negative|floatformat:-2 }} </td>
+                </tr>
+            </tbody>
+        </table>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock content %}

@@ -138,9 +138,12 @@ class PreprocessedText:
         # self.text = open(f'{pathlib.Path(__file__).parent.parent.resolve()}/media/{text.file.name}', encoding='utf-8', mode="r").read()
         self.text = open(f'{pathlib.Path(__file__).parent.parent.resolve()}/media/{filename}', encoding='utf-8', mode="r").read()
         self.sentence_list = sent_tokenize(self.text.strip()) 
+        #print(self.sentence_list[0:2])
         self.split_sentences_list = [remove_punctuation_and_tokenize(words) for words in self.sentence_list]
+        #print(self.split_sentences_list[0:2])
         self.sentences_length_list = [len(sent) for sent in self.split_sentences_list]
-        self.word_list = remove_punctuation_and_tokenize(self.text)
+        self.word_list = remove_punctuation_and_tokenize((' ').join(self.sentence_list))
+        #print(self.word_list[0:2])
         self.list_of_lemmas = [morph.parse(word)[0].normal_form for word in self.word_list]
         self.words_length_list = [len(word) for word in self.word_list]
         self.lemmas_except_stopwords = [token for token in self.list_of_lemmas if token not in russian_stopwords\
