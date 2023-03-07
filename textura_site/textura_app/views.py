@@ -2,6 +2,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .metrics import PreprocessedText
 from django.http import HttpResponse
 
+import plotly.express as px
+from plotly.offline import plot
+import plotly.graph_objects as go
+from plotly.graph_objs import Box, Scatter
+
 from .models import CorporaEntityData, UploadedText, CorpusEntityData
 from .forms import CorporaEntityForm, UploadTextForm, CorpusEntityForm
 
@@ -77,13 +82,42 @@ def process_text(text):
 #     else:
 #            return HttpResponse("Request method is not a GET")
 
+def prepare_charts():
+    corpus = CorpusEntityData.objects.all()
+    plot_div = dict()
 
+    asl = [entry.avg_sentence_length for entry in corpus if entry.avg_sentence_length is not None]
+    awl = [entry.avg_word_length for entry in corpus if entry.avg_word_length is not None]
+    asw = [entry.avg_syl_per_word for entry in corpus if entry.avg_syl_per_word is not None]
+
+    plot_div['asl'] = plot([Box(y=asl,
+                    opacity=0.8, 
+                    marker_color='green',
+                    width = 100
+                    )],
+                    output_type='div')
+    plot_div['awl'] = plot([Box(y=awl,
+                    opacity=0.8, 
+                    marker_color='blue',
+                    width = 100
+                    )],
+                    output_type='div')
+    plot_div['asw'] = plot([Box(y=asw,
+                    opacity=0.8, 
+                    marker_color='red',
+                    width = 100
+                    )],
+                    
+                    output_type='div')
+    
+
+    return plot_div
 
 
 
 def analysis(request):
     texts = UploadedText.objects.all()
-    
+    plot_div = prepare_charts()
     for text in texts:
         print(text.avg_sentence_length)
         if None in [
@@ -93,8 +127,10 @@ def analysis(request):
             text.blanchefort_positive
         ]:
             process_text(text)
-               
-    return render(request, 'textura_app/analysis.html', {'texts': texts})
+            plot_div = prepare_charts()
+
+            
+    return render(request, 'textura_app/analysis.html', {'texts': texts, 'plot_div': plot_div})
 
 
 
