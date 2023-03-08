@@ -92,23 +92,75 @@ def prepare_charts():
 
     plot_div['asl'] = plot([Box(y=asl,
                     opacity=0.8, 
-                    marker_color='green',
-                    width = 100
+                    marker_color='blue'
                     )],
-                    output_type='div')
+                    output_type='div'
+                    )
     plot_div['awl'] = plot([Box(y=awl,
                     opacity=0.8, 
-                    marker_color='blue',
-                    width = 100
+                    marker_color='blue'
                     )],
                     output_type='div')
     plot_div['asw'] = plot([Box(y=asw,
                     opacity=0.8, 
-                    marker_color='red',
-                    width = 100
+                    marker_color='blue',
                     )],
-                    
                     output_type='div')
+    
+
+    ttr = [entry.type_token_ratio for entry in corpus if entry.type_token_ratio is not None]
+    ld = [entry.lexical_density for entry in corpus if entry.lexical_density is not None]
+
+    plot_div['ttr'] = plot([Box(y=ttr,
+                    opacity=0.8, 
+                    marker_color='blue'
+                    )],
+                    output_type='div')
+    plot_div['ld'] = plot([Box(y=ld,
+                    opacity=0.8, 
+                    marker_color='blue'
+                    )],
+                    output_type='div')
+    
+
+    hwq = [entry.hard_words_quantity for entry in corpus if entry.hard_words_quantity is not None]
+    fres = [entry.fres for entry in corpus if entry.fres is not None]
+    gunning_fog = [entry.gunning_fog for entry in corpus if entry.gunning_fog is not None]
+    ari = [entry.ari for entry in corpus if entry.ari is not None]
+    smog = [entry.smog for entry in corpus if entry.smog is not None]
+    cli = [entry.cli for entry in corpus if entry.cli is not None]
+    
+    plot_div['hwq'] = plot([Box(y=hwq,
+                    opacity=0.8, 
+                    marker_color='blue'
+                    )],
+                    output_type='div')
+    plot_div['fres'] = plot([Box(y=fres,
+                    opacity=0.8, 
+                    marker_color='blue'
+                    )],
+                    output_type='div')
+    plot_div['gunning_fog'] = plot([Box(y=gunning_fog,
+                    opacity=0.8, 
+                    marker_color='blue'
+                    )],
+                    output_type='div')
+    plot_div['ari'] = plot([Box(y=ari,
+                    opacity=0.8, 
+                    marker_color='blue'
+                    )],
+                    output_type='div')
+    plot_div['smog'] = plot([Box(y=smog,
+                    opacity=0.8, 
+                    marker_color='blue'
+                    )],
+                    output_type='div')
+    plot_div['cli'] = plot([Box(y=cli,
+                    opacity=0.8, 
+                    marker_color='blue'
+                    )],
+                    output_type='div')
+    
     
 
     return plot_div

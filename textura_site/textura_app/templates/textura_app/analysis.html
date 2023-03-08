@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="row mt-4">
-    <div class="col-8">
+    <div class="col-12">
 
         {% for message in messages %}
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -34,9 +34,9 @@
                     <td>{{ text.category }}</td>
                     <td>{{ text.time_period }}</td>
                     
-                    <td class="form-inline">
+                    <td class="form-inline" style="display: flex; flex-direction: row;">
                         <a class="btn btn-primary mr-2" href="media/{{ text.file }}" download role="button">Выгрузить</a>
-                        <form action="{% url 'delete_text' text.id %}" method="POST">
+                        <form action="{% url 'delete_text' text.id %}"   method="POST">
                             {% csrf_token %}
                             <input type="submit" role="button" class="btn btn-danger" value="Удалить" onclick="return confirm('Удалить текст {{ text.title }}?')">
                         </form>
@@ -48,164 +48,148 @@
             </tbody>
         </table>
 
-        {% for text in texts %}
-
-        <table class="table">
-            <thead class="table-dark">
-                <tr>
-                    <th scope="col">Ср. длина предложения</th>
-                    <th scope="col">Ср. длина слов</th>
-                    <th scope="col">Количество предложений</th>
-                    <th scope="col">Количество слов</th> 
-                    <th scope="col">Ср. кол-во слогов в словах</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td> {{ text.avg_sentence_length|floatformat:-2 }} <br/> σ = {{text.avg_sentence_length_stdev|floatformat:-2}} <br/>{{text.avg_sentence_length_rank|floatformat:-2}}%</td>
-                    <td> {{ text.avg_word_length|floatformat:-2 }} <br/> σ = {{text.avg_word_length_stdev|floatformat:-2}} <br/>{{text.avg_word_length_rank|floatformat:-2}}% </td>
-                    
-                    <td> {{ text.sentence_count }} </td>
-                    <td> {{ text.word_count }} </td>
-                    <td> {{ text.avg_syl_per_word|floatformat:-2 }} </td>
-                </tr>
-            </tbody>
-        </table>
-
-
-
-        <table class="table">
-            <thead class="table-dark">
-                <tr>
-                    <th scope="col">Коэф. лексического разнообразия</th>
-                    <th scope="col">Коэф. лексической плотности</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td> {{ text.type_token_ratio|floatformat:-2 }} </td>
-                    <td> {{ text.lexical_density|floatformat:-2 }} </td>
-                </tr>
-            </tbody>
-        </table>
-
-
-        <table class="table">
-            <thead class="table-dark">
-                <tr>
-                    <th scope="col">Кол-во многосложных слов</th>
-                    <th scope="col">Индекс удобочитаемости</th>
-                    <th scope="col">FRES</th>
-                    <th scope="col">Gunning Fog</th>
-                    <th scope="col">SMOG</th>
-                    <th scope="col">CLI</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td> {{ text.hard_words_quantity|floatformat:-2 }} </td>
-                    <td> {{ text.ari|floatformat:-2 }} </td>
-                    <td> {{ text.fres|floatformat:-2 }} </td>
-                    <td> {{ text.gunning_fog|floatformat:-2 }} </td>
-                    <td> {{ text.smog|floatformat:-2 }} </td>
-                    <td> {{ text.cli|floatformat:-2 }} </td>
-                </tr>
-            </tbody>
-        </table>
-
-        <table class="table">
-            <thead class="table-dark">
-                <tr>
-                    <th scope="col">Ср. позитивная оценка</th>
-                    <th scope="col">Ср. нейтральная оценка</th>
-                    <th scope="col">Ср. негативная оценка</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td> {{ text.blanchefort_positive|floatformat:-2 }} </td>
-                    <td> {{ text.blanchefort_neutral|floatformat:-2 }} </td>
-                    <td> {{ text.blanchefort_negative|floatformat:-2 }} </td>
-                </tr>
-            </tbody>
-        </table>
-        {% endfor %}
     </div>
 
-    <div class="col-4">
+    
+    {% for text in texts %}
+    <div class="col-12">
         <h2>Сравнительный анализ</h2>
-        <div class="accordion accordion-flush" id="accordionExample">
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  Базовые метрики
-                </button>
-              </h2>
-              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  
-                    <div id="carouselExample" class="carousel slide">
-                        <div class="carousel-inner">
-                          <div class="carousel-item active">
-                            <div class="d-block w-100">
-                            {% autoescape off %}
-                            {{ plot_div.asl }}
-                            {% endautoescape %}
-                            </div>
-                          </div>
-                          <div class="carousel-item">
-                            <div class="d-block w-50">
-                            {% autoescape off %}
-                            {{ plot_div.awl }}
-                            {% endautoescape %}
-                            </div>
-                          </div>
-                          <div class="carousel-item">
-                            <div class="d-block w-50">
-                            {% autoescape off %}
-                            {{ plot_div.asw }}
-                            {% endautoescape %}
-                            </div>
-                          </div>
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                          <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                          <span class="visually-hidden">Next</span>
-                        </button>
-                      </div>
+        
+                  <table class="table">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Ср. длина предложения</th>
+                            <th scope="col">Ср. длина слов</th>
+                            <th scope="col">Количество предложений</th>
+                            <th scope="col">Количество слов</th> 
+                            <th scope="col">Ср. кол-во слогов в словах</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> {{ text.avg_sentence_length|floatformat:-2 }} <br/> σ = {{text.avg_sentence_length_stdev|floatformat:-2}} <br/>{{text.avg_sentence_length_rank|floatformat:-2}}%</td>
+                            <td> {{ text.avg_word_length|floatformat:-2 }} <br/> σ = {{text.avg_word_length_stdev|floatformat:-2}} <br/>{{text.avg_word_length_rank|floatformat:-2}}% </td>
+                            
+                            <td> {{ text.sentence_count }} </td>
+                            <td> {{ text.word_count }} </td>
+                            <td> {{ text.avg_syl_per_word|floatformat:-2 }} </td>
+                        </tr>
+                    </tbody>
+                  </table>
 
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingTwo">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                  Лексические характеристики
-                </button>
-              </h2>
-              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingThree">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                  Метрики удобочитаемости
-                </button>
-              </h2>
-              <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                </div>
-              </div>
-            </div>
+                  <div class="row">
+                    <div class="col-4">
+                      {% autoescape off %}
+                      {{ plot_div.asl }}
+                    </div>
+                    <div class="col-4">
+                      {{ plot_div.awl }}
+                    </div>
+                    <div class="col-4">
+                      {{ plot_div.asw }}
+                      {% endautoescape %}
+                    </div>
+                  </div>
+                  
+                    
+                
+
+            
+                  <table class="table">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Коэф. лексического разнообразия</th>
+                            <th scope="col">Коэф. лексической плотности</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> {{ text.type_token_ratio|floatformat:-2 }} </td>
+                            <td> {{ text.lexical_density|floatformat:-2 }} </td>
+                        </tr>
+                    </tbody>
+                  </table>
+
+                  <div class="row">
+                    <div class="col-2"></div>
+                    <div class="col-4">
+                      {% autoescape off %}
+                      {{ plot_div.ttr }}
+                    </div>
+                    <div class="col-4">
+                      {{ plot_div.ld }}
+                      {% endautoescape %}
+                    </div>
+                  </div>
+                  
+                
+            
+                  <table class="table">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Кол-во многосложных слов</th>
+                            <th scope="col">Индекс удобочитаемости</th>
+                            <th scope="col">FRES</th>
+                            <th scope="col">Gunning Fog</th>
+                            <th scope="col">SMOG</th>
+                            <th scope="col">CLI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> {{ text.hard_words_quantity|floatformat:-2 }} </td>
+                            <td> {{ text.ari|floatformat:-2 }} </td>
+                            <td> {{ text.fres|floatformat:-2 }} </td>
+                            <td> {{ text.gunning_fog|floatformat:-2 }} </td>
+                            <td> {{ text.smog|floatformat:-2 }} </td>
+                            <td> {{ text.cli|floatformat:-2 }} </td>
+                        </tr>
+                    </tbody>
+                  </table>
+                  <div class="row">
+                    <div class="col-4">
+                      {% autoescape off %}
+                      {{ plot_div.hwq }}
+                    </div>
+                    <div class="col-4">
+                      {{ plot_div.fres }}
+                    </div>
+                    <div class="col-4">
+                      {{ plot_div.gunning_fog }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">
+                      {{ plot_div.ari }}
+                    </div>
+                    <div class="col-4">
+                      {{ plot_div.smog }}
+                    </div>
+                    <div class="col-4">
+                      {{ plot_div.cli }}
+                      {% endautoescape %}
+                    </div>
+                  </div>
+                
+            
+                  <table class="table">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Ср. позитивная оценка</th>
+                            <th scope="col">Ср. нейтральная оценка</th>
+                            <th scope="col">Ср. негативная оценка</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> {{ text.blanchefort_positive|floatformat:-2 }} </td>
+                            <td> {{ text.blanchefort_neutral|floatformat:-2 }} </td>
+                            <td> {{ text.blanchefort_negative|floatformat:-2 }} </td>
+                        </tr>
+                    </tbody>
+                  </table>
           </div>
     </div>
+    {% endfor %}
 </div>
 {% endblock content %}
