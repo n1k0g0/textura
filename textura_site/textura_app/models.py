@@ -124,3 +124,14 @@ class UploadedText(models.Model):
         return self.title
 
 
+
+class FiltersModel(models.Model):
+ 
+    time_period = models.CharField(max_length = 50, default=None, blank=True, null=True)
+    category = models.CharField(max_length = 50, default=None, blank=True, null=True)
+    author = models.CharField(max_length = 100, default=None, blank=True, null=True)
+
+    class Meta:
+        app_label = 'textura_app'
+    def __str__(self):
+        return self.title

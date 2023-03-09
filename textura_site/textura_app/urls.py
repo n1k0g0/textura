@@ -11,6 +11,8 @@ urlpatterns = [
     path('analysis', views.analysis, name='analysis'),
     path('', views.upload_text, name='upload_text'),
     path('delete/<int:pk>/', views.delete_text, name='delete_text'),
+    path('update_text/<int:pk>/', views.update_text, name='update_text'),
+    path('update_filters/', views.update_filters, name='update_filters'),
     path('create', views.add_corpora_entity ),
     #re_path(r'^process/', views.process, name='process')   # likepost view at /likepost)
 ]

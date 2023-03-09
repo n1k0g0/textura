@@ -1,5 +1,5 @@
 from django import forms
-from .models import CorporaEntityData, UploadedText, CorpusEntityData
+from .models import CorporaEntityData, UploadedText, CorpusEntityData, FiltersModel
 from django.core.exceptions import ValidationError
  
  
@@ -58,6 +58,20 @@ class UploadTextForm(forms.ModelForm):
         #    raise ValidationError("File is not .txt")
         
         # return any errors if found
+        return self.cleaned_data
+    
+
+class FiltersForm(forms.ModelForm):
+    class Meta:
+        model = FiltersModel
+        fields = ['author', 'category', 'time_period']
+        labels = {
+        "author": "Автор",
+        "category": "Категория",
+        "time_period": "Век создания"
+        }
+    def clean(self):
+        super(FiltersForm, self).clean()
         return self.cleaned_data
         
     

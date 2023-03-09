@@ -35,8 +35,11 @@
                     <td>{{ text.time_period }}</td>
                     
                     <td class="form-inline" style="display: flex; flex-direction: row;">
-                        <a class="btn btn-primary mr-2" href="media/{{ text.file }}" download role="button">Выгрузить</a>
-                        <form action="{% url 'delete_text' text.id %}"   method="POST">
+
+                        <a class="btn btn-primary mr-2" href="{% url 'update_text' text.id %}" role="button">Обновить</a>
+                        <a class="btn btn-primary mr-2" href="{% url 'update_filters' %}" role="button">Фильтровать</a>
+                        <!-- <a class="btn btn-primary mr-2" href="media/{{ text.file }}" download role="button">Выгрузить</a> -->
+                        <form action="{% url 'delete_text' text.id %}" method="POST">
                             {% csrf_token %}
                             <input type="submit" role="button" class="btn btn-danger" value="Удалить" onclick="return confirm('Удалить текст {{ text.title }}?')">
                         </form>
@@ -67,8 +70,8 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td> {{ text.avg_sentence_length|floatformat:-2 }} <br/> σ = {{text.avg_sentence_length_stdev|floatformat:-2}} <br/>{{text.avg_sentence_length_rank|floatformat:-2}}%</td>
-                            <td> {{ text.avg_word_length|floatformat:-2 }} <br/> σ = {{text.avg_word_length_stdev|floatformat:-2}} <br/>{{text.avg_word_length_rank|floatformat:-2}}% </td>
+                            <td> {{ text.avg_sentence_length|floatformat:-2 }} <br/> σ = {{text.avg_sentence_length_stdev|floatformat:-2}}</td>
+                            <td> {{ text.avg_word_length|floatformat:-2 }} <br/> σ = {{text.avg_word_length_stdev|floatformat:-2}}</td>
                             
                             <td> {{ text.sentence_count }} </td>
                             <td> {{ text.word_count }} </td>
@@ -80,13 +83,13 @@
                   <div class="row">
                     <div class="col-4">
                       {% autoescape off %}
-                      {{ plot_div.asl }}
+                      {{ plot_div.avg_sentence_length }}
                     </div>
                     <div class="col-4">
-                      {{ plot_div.awl }}
+                      {{ plot_div.avg_word_length }}
                     </div>
                     <div class="col-4">
-                      {{ plot_div.asw }}
+                      {{ plot_div.avg_syl_per_word }}
                       {% endautoescape %}
                     </div>
                   </div>
@@ -114,10 +117,10 @@
                     <div class="col-2"></div>
                     <div class="col-4">
                       {% autoescape off %}
-                      {{ plot_div.ttr }}
+                      {{ plot_div.type_token_ratio }}
                     </div>
                     <div class="col-4">
-                      {{ plot_div.ld }}
+                      {{ plot_div.lexical_density }}
                       {% endautoescape %}
                     </div>
                   </div>
@@ -149,7 +152,7 @@
                   <div class="row">
                     <div class="col-4">
                       {% autoescape off %}
-                      {{ plot_div.hwq }}
+                      {{ plot_div.hard_words_quantity }}
                     </div>
                     <div class="col-4">
                       {{ plot_div.fres }}
