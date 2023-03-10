@@ -7,10 +7,25 @@ from plotly.offline import plot
 import plotly.graph_objects as go
 from plotly.graph_objs import Box, Scatter
 
+import numpy as np
+
 
 from .models import CorporaEntityData, UploadedText, CorpusEntityData, FiltersModel
 from .forms import CorporaEntityForm, UploadTextForm, CorpusEntityForm, FiltersForm
 
+TEXT_MODEL_PLOT_DICT = {
+                "avg_sentence_length": "Ср. длина предложения",
+                "avg_word_length": "Ср. длина слова",
+                "avg_syl_per_word": "Ср. кол-во слогов в словах",
+                "type_token_ratio": "Коэф. лексического разнообразия",
+                "lexical_density": "Коэф. лексической плотности",
+                "hard_words_quantity": "Кол-во многосложных слов",
+                "fres": "FRES",
+                "gunning_fog": "Gunning Fog",
+                "ari": "Индекс удобочитаемости",
+                "smog": "SMOG",
+                "cli": "CLI"
+}
 
  
 def add_corpora_entity(request):
@@ -83,7 +98,7 @@ def process_text(text):
 #     else:
 #            return HttpResponse("Request method is not a GET")
 
-def prepare_charts(filters_list):
+def prepare_charts(filters_list, texts):
     print(filters_list)
     corpus_objects = CorpusEntityData.objects.all()
     for filter in filters_list:
@@ -99,17 +114,43 @@ def prepare_charts(filters_list):
     plot_div = dict()
 
     if len(corpus):
-        for key in corpus[0]:
-            #print(key)
+        # print(corpus[0].keys())
+        for key in TEXT_MODEL_PLOT_DICT.keys():
+
             list_of_values_for_column = [entry[key] for entry in corpus if entry[key] is not None]
+            fig = go.Figure(data = Box(name = TEXT_MODEL_PLOT_DICT[key], y = list_of_values_for_column, opacity=0.7, marker_color='blue'))
 
-            fig = go.Figure(data = Box(name = 'Plot1', y = list_of_values_for_column, opacity=0.8, marker_color='blue'))
+            if len(texts) and key in TEXT_MODEL_PLOT_DICT.keys():
+                # print(texts.values()[0].keys())
+                current_text_value = texts.values()[0][key]
+                text_name = texts.values()[0]['title']
+                if len(text_name) > 15:
+                    text_name = 'Пользовательский текст'
+                formatted_value = "%.2f" % texts.values()[0][key]
+                text_name = f'{formatted_value} – ' + text_name
+                
+                q3, q1 = np.percentile(list_of_values_for_column, [75 ,25])
+                iqr = abs(q3 - q1)
+                lower_fence, upper_fence = q1 - 1.5 * iqr, q3 + 1.5 * iqr
+                print(lower_fence, q1, q3, upper_fence)
+                if current_text_value > q1 and current_text_value < q3:
+                    fig.update_traces(marker_color='lightseagreen')
+                    fig.update_layout(title_text=f'{TEXT_MODEL_PLOT_DICT[key]} в норме!')
+                elif current_text_value > upper_fence or current_text_value < lower_fence:
+                    fig.update_traces(marker_color='indianred')
+                    fig.update_layout(title_text='Сильное отклонение от нормы!')
+                else:
+                    fig.update_layout(title_text=f'{TEXT_MODEL_PLOT_DICT[key]} близко к норме!')
 
-            #Update layout for graph object Figure
-            fig.update_layout(title_text = 'Plotly_Plot1',
-                            yaxis_title = 'Y_Axis',
-                            margin={'b':30,'l':0,'r':0,'t':30}
-                            )
+                fig.update_layout(
+                                # yaxis_title = 'Y_Axis',
+                                margin={'b':30,'l':0,'r':0,'t':30}
+                                )
+                fig.add_hline(
+                    y=current_text_value,
+                    annotation_text=text_name,
+                    annotation_position='top left'
+                    )
             
             #Turn graph object into local plotly graph
             plot_div[key] = plot({'data': fig}, output_type='div')
@@ -123,7 +164,7 @@ def prepare_charts(filters_list):
 def analysis(request):
     texts = UploadedText.objects.all()
     filters_values_list = FiltersModel.objects.values()
-    plot_div = prepare_charts(filters_values_list)
+    plot_div = prepare_charts(filters_values_list, texts)
     for text in texts:
         # print(text.avg_sentence_length)
         if None in [
@@ -133,8 +174,7 @@ def analysis(request):
             text.blanchefort_positive
         ]:
             process_text(text)
-
-            plot_div = prepare_charts(filters_values_list)
+            # plot_div = prepare_charts(filters_values_list, texts)
 
             
     return render(request, 'textura_app/analysis.html', {'texts': texts, 'plot_div': plot_div})
