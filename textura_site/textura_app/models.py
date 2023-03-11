@@ -31,13 +31,15 @@ class CorpusEntityData(models.Model):
     #block basic
     avg_sentence_length = models.FloatField(default=None, blank=True, null=True) 
     avg_sentence_length_stdev = models.FloatField(default=None, blank=True, null=True) 
+    avg_sentence_length_median = models.FloatField(default=None, blank=True, null=True) 
+    avg_sentence_length_iqr = models.FloatField(default=None, blank=True, null=True) 
     max_sentence_length = models.FloatField(default=None, blank=True, null=True) 
-    sentence_count = models.FloatField(default=None, blank=True, null=True) 
     
     avg_word_length = models.FloatField(default=None, blank=True, null=True) 
     avg_word_length_stdev = models.FloatField(default=None, blank=True, null=True) 
+    avg_word_length_median = models.FloatField(default=None, blank=True, null=True) 
+    avg_word_length_iqr = models.FloatField(default=None, blank=True, null=True) 
     max_word_length = models.FloatField(default=None, blank=True, null=True) 
-    word_count = models.FloatField(default=None, blank=True, null=True) 
 
     avg_syl_per_word = models.FloatField(default=None, blank=True, null=True) 
 
@@ -81,15 +83,15 @@ class UploadedText(models.Model):
     #block basic
     avg_sentence_length = models.FloatField(default=None, blank=True, null=True) 
     avg_sentence_length_stdev = models.FloatField(default=None, blank=True, null=True) 
-    avg_sentence_length_rank = models.FloatField(default=None, blank=True, null=True) 
+    avg_sentence_length_median = models.FloatField(default=None, blank=True, null=True) 
+    avg_sentence_length_iqr = models.FloatField(default=None, blank=True, null=True) 
     max_sentence_length = models.FloatField(default=None, blank=True, null=True) 
-    sentence_count = models.FloatField(default=None, blank=True, null=True) 
     
     avg_word_length = models.FloatField(default=None, blank=True, null=True) 
     avg_word_length_stdev = models.FloatField(default=None, blank=True, null=True) 
-    avg_word_length_rank = models.FloatField(default=None, blank=True, null=True) 
+    avg_word_length_median = models.FloatField(default=None, blank=True, null=True) 
+    avg_word_length_iqr = models.FloatField(default=None, blank=True, null=True) 
     max_word_length = models.FloatField(default=None, blank=True, null=True) 
-    word_count = models.FloatField(default=None, blank=True, null=True) 
 
     avg_syl_per_word = models.FloatField(default=None, blank=True, null=True) 
 

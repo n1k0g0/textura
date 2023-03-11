@@ -1,15 +1,16 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .metrics import PreprocessedText
+from .utils import prepare_charts
 from django.http import HttpResponse, HttpResponseRedirect
 
-import plotly.express as px
-from plotly.offline import plot
-import plotly.graph_objects as go
-from plotly.graph_objs import Box, Scatter
+
+
+
 
 
 from .models import CorporaEntityData, UploadedText, CorpusEntityData, FiltersModel
 from .forms import CorporaEntityForm, UploadTextForm, CorpusEntityForm, FiltersForm
+
 
 
  
@@ -44,15 +45,15 @@ def process_text(text):
 
     text.avg_sentence_length = preprocessed_text.asl
     text.avg_sentence_length_stdev = preprocessed_text.asl_stdev
-    text.avg_sentence_length_rank = preprocessed_text.asl_rank
+    text.avg_sentence_length_median = preprocessed_text.asl_med
+    text.avg_sentence_length_iqr = preprocessed_text.asl_iqr
     text.max_sentence_length = preprocessed_text.msl
-    text.sentence_count = preprocessed_text.s_count 
     
     text.avg_word_length = preprocessed_text.awl
-    text.avg_word_length_rank = preprocessed_text.awl_rank
+    text.avg_word_length_median = preprocessed_text.awl_med
+    text.avg_word_length_iqr = preprocessed_text.awl_iqr
     text.avg_word_length_stdev = preprocessed_text.awl_stdev
     text.max_word_length = preprocessed_text.mwl
-    text.word_count = preprocessed_text.w_count
     text.avg_syl_per_word = preprocessed_text.asw
 
     text.type_token_ratio = preprocessed_text.ttr
@@ -83,47 +84,36 @@ def process_text(text):
 #     else:
 #            return HttpResponse("Request method is not a GET")
 
-def prepare_charts(filters_list):
-    print(filters_list)
-    corpus_objects = CorpusEntityData.objects.all()
-    for filter in filters_list:
-        if filter['author'] != '-':
-            corpus_objects = corpus_objects.filter(author=filter['author'])
-        if filter['time_period'] != '-':
-            corpus_objects = corpus_objects.filter(time_period=filter['time_period'])
-        if filter['category'] != '-':
-            corpus_objects = corpus_objects.filter(category=filter['category'])
-        
-        
-    corpus = corpus_objects.values()
-    plot_div = dict()
 
-    if len(corpus):
-        for key in corpus[0]:
-            #print(key)
-            list_of_values_for_column = [entry[key] for entry in corpus if entry[key] is not None]
-
-            fig = go.Figure(data = Box(name = 'Plot1', y = list_of_values_for_column, opacity=0.8, marker_color='blue'))
-
-            #Update layout for graph object Figure
-            fig.update_layout(title_text = 'Plotly_Plot1',
-                            yaxis_title = 'Y_Axis',
-                            margin={'b':30,'l':0,'r':0,'t':30}
-                            )
-            
-            #Turn graph object into local plotly graph
-            plot_div[key] = plot({'data': fig}, output_type='div')
-
-    return plot_div
 
     
 
 
 
-def analysis(request):
+def analysis_graphs(request):
     texts = UploadedText.objects.all()
     filters_values_list = FiltersModel.objects.values()
-    plot_div = prepare_charts(filters_values_list)
+    # plot_div = prepare_charts(filters_values_list, texts)
+    for text in texts:
+        # print(text.avg_sentence_length)
+        if None in [
+            text.avg_sentence_length,
+            text.type_token_ratio,
+            text.hard_words_quantity,
+            text.blanchefort_positive
+        ]:
+            process_text(text)
+    plot_div = prepare_charts(filters_values_list, texts)
+
+            
+    return render(request, 'textura_app/analysis.html', {'texts': texts, 'plot_div': plot_div})
+
+
+
+def analysis(request):
+    texts = UploadedText.objects.all()
+    # filters_values_list = FiltersModel.objects.values()
+    # plot_div = prepare_charts(filters_values_list, texts)
     for text in texts:
         # print(text.avg_sentence_length)
         if None in [
@@ -134,10 +124,8 @@ def analysis(request):
         ]:
             process_text(text)
 
-            plot_div = prepare_charts(filters_values_list)
-
             
-    return render(request, 'textura_app/analysis.html', {'texts': texts, 'plot_div': plot_div})
+    return render(request, 'textura_app/analysis.html', {'texts': texts})
 
 
 

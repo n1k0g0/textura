@@ -100,16 +100,16 @@ class PreprocessedText:
     lemmas_except_stopwords = None
     asl = None
     asl_stdev = None
-    asl_rank = None
+    asl_med = None
+    asl_iqr = None
     msl = None
     asw = None
-    s_count = None
 
     awl = None
     awl_stdev = None
-    awl_rank = None
+    awl_med = None 
+    awl_iqr = None
     mwl = None
-    w_count = None
 
     ttr = None
     lex_den = None
@@ -154,15 +154,15 @@ class PreprocessedText:
     def load_basics(self):
         self.asl = statistics.mean(self.sentences_length_list)
         self.asl_stdev = statistics.stdev(self.sentences_length_list)
-        self.asl_rank = stats.percentileofscore([entry.avg_sentence_length for entry in CorpusEntityData.objects.all() if entry.avg_sentence_length is not None], self.asl)
         self.msl = max(self.sentences_length_list)
         self.asw = np.mean(np.array([len(dic.inserted(va).split('-')) for va in ' '.join(self.word_list).split()]))
         self.awl = statistics.mean(self.words_length_list)
         self.awl_stdev = statistics.stdev(self.words_length_list)
-        self.awl_rank = stats.percentileofscore([entry.avg_word_length for entry in CorpusEntityData.objects.all() if entry.avg_word_length is not None], self.awl)
         self.mwl = max(self.words_length_list)
-        self.w_count = len(self.word_list)
-        self.s_count = len(self.sentence_list)
+        self.awl_med = statistics.median(self.words_length_list)
+        self.asl_med = statistics.median(self.sentences_length_list)
+        q3, q1 = np.percentile(self.words_length_list, [75 ,25])
+        self.awl_iqr = q3 - q1
 
     def load_vocab(self):
         self.ttr = len(set(self.list_of_lemmas)) / len(self.list_of_lemmas) if len(set(self.list_of_lemmas)) else 0
