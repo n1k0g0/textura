@@ -4,22 +4,110 @@
 
 {% block content %}
 <div class="row mt-4">
-    <div class="col-md-8 offset-md-2">
-        <h2>Загрузите файл .txt</h2>
-        <form method="POST" enctype="multipart/form-data" class="customForm">
+    <div class="col-md-8 offset-md-2 mt-5">
+        <h1>Textura</h1>
+        <div>
+            <small class="text-muted lead" style="font-size: 1.5rem;">Сравнительный текстовый анализ по количественным метрикам
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                </svg>
+            </small>
+        </div>
+    </div>
+
+
+    <div class="col-8 offset-md-2 mt-5">
+        <h4>Загрузите файл .txt</h4>
+        <form method="POST" enctype="multipart/form-data" >
             {% csrf_token %}
-            {% for field in form %}
-                <div class="fieldWrapper">
-                    {{ field.errors }}
-                    {{ field.label_tag }} {{ field }}
-                    {% if field.help_text %}
-                    <p class="help">{{ field.help_text|safe }}</p>
-                    {% endif %}
-                </div>
-            {% endfor %}
-            <button type="submit" class="btn btn-primary">Анализировать</button>
+            <div class="card">
+                
+            
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="fieldWrapper card-body">
+                            {{ form.file.errors }}
+                            {{ form.file }}
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="col-12">
+                                <a class="text-white" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Добавить дополнительную информацию о тексте"
+                                data-bs-custom-class="custom-tooltip">
+                                <button class="btn btn-primary me-2 ms-3" type="button" 
+                                data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter-left" viewBox="0 0 16 16">
+                                        <path d="M2 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+                                    </svg>
+                                </button>
+
+                            </a>
+                            <button type="submit" class="btn btn-success ms-2"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Анализировать текст"
+                            data-bs-custom-class="custom-tooltip">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                                        <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                                    </svg>
+                            </button>
+                        </div>
+
+                            <div class="collapse" id="collapseExample">
+                                <div class="card-body">
+                                    {% for field in form %}
+                                    {% if field.label != "Файл" %}
+                                    <div class="fieldWrapper fieldWrapper-custom my-1">
+                                        {{ field.errors }}
+                                        {{ field.label_tag }} {{ field }}
+                                        {% if field.help_text %}
+                                        <p class="help">{{ field.help_text|safe }}</p>
+                                        {% endif %}
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
+                                </div>
+                              </div>
+                            <div>
+
+
+                    </li>
+                    
+                </ul>
+
+            </div>
+
+
+
+            
+
+            
+                
+            </div>
         </form>
     </div>
+
+
+
+
+
+
+    <div class="col-md-8 offset-md-2 mt-5">
+        <h4>
+                Как это работает?
+        </h4>
+        
+    </div>
+
+    <div class="col-8 offset-md-2 card">
+        <div class="card-body">
+          <ul class="my-0">
+            <li class="mb-1">Загрузите текст, который вы бы хотели проанализровать</li>
+            <li class="mb-1">Изучите карточку анализа текста по количественным метрикам</li>
+            <li>Для подробной информации посмотрите наш <a class="text-primary" href="{% url 'show_corpora' %}">гайд по использованию</a></li>
+          </ul>
+        </div>
+    </div>
+
+
+
 </div>
 {% endblock content %}
 

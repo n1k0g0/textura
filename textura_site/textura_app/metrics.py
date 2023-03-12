@@ -163,6 +163,8 @@ class PreprocessedText:
         self.asl_med = statistics.median(self.sentences_length_list)
         q3, q1 = np.percentile(self.words_length_list, [75 ,25])
         self.awl_iqr = q3 - q1
+        q3_s, q1_s = np.percentile(self.sentences_length_list, [75 ,25])
+        self.asl_iqr = q3_s - q1_s
 
     def load_vocab(self):
         self.ttr = len(set(self.list_of_lemmas)) / len(self.list_of_lemmas) if len(set(self.list_of_lemmas)) else 0

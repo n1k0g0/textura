@@ -68,20 +68,51 @@
                   <table class="table">
                     <thead class="table-dark">
                         <tr>
-                            <th scope="col">Ср. длина предложения</th>
-                            <th scope="col">Ср. длина слов</th>
-                            <th scope="col">Количество предложений</th>
-                            <th scope="col">Количество слов</th> 
-                            <th scope="col">Ср. кол-во слогов в словах</th>
+                            <th scope="col">
+                              <div class="fs-6">Ср. длина предложения
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill text-white mb-1" viewBox="0 0 16 16">
+                                  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                </svg>
+                              </div>
+                            </th>
+                            <th scope="col">
+                              <div class="fs-6">Медиана длины предложений
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill text-white mb-1" viewBox="0 0 16 16">
+                                  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                </svg>
+                              </div>
+                            </th>
+                            <th scope="col">
+                              <div class="fs-6">Ср. длина слов
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill text-white mb-1" viewBox="0 0 16 16">
+                                  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                </svg>
+                              </div>
+                            </th>
+                            <th scope="col">
+                              <div class="fs-6">Медиана длины слов
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill text-white mb-1" viewBox="0 0 16 16">
+                                  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                </svg>
+                              </div>
+                            </th> 
+                            <th scope="col">
+                              <div class="fs-6">Ср. кол-во слогов в словах
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill text-white mb-1" viewBox="0 0 16 16">
+                                  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                </svg>
+                              </div>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td> {{ text.avg_sentence_length|floatformat:-2 }} <br/> σ = {{text.avg_sentence_length_stdev|floatformat:-2}}</td>
-                            <td> {{ text.avg_word_length|floatformat:-2 }} <br/> σ = {{text.avg_word_length_stdev|floatformat:-2}}</td>
+                            <td> {{ text.avg_sentence_length_median }} <br/> iqr = {{text.avg_sentence_length_iqr|floatformat:-2}}</td>
                             
-                            <td> {{ text.sentence_count }} </td>
-                            <td> {{ text.word_count }} </td>
+                            <td> {{ text.avg_word_length|floatformat:-2 }} <br/> σ = {{text.avg_word_length_stdev|floatformat:-2}}</td>
+                            <td> {{ text.avg_word_length_median|floatformat:-2 }} <br/> iqr = {{text.avg_word_length_iqr|floatformat:-2}}</td>
+
                             <td> {{ text.avg_syl_per_word|floatformat:-2 }} </td>
                         </tr>
                     </tbody>
