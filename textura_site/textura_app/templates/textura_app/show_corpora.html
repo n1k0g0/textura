@@ -1,0 +1,42 @@
+{% extends 'textura_app/base.html' %}
+
+{% block title %}Corpora | {{ block.super }}{% endblock title %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-md-12">
+
+        {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+
+        <h2>Все тексты</h2>
+        
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Название</th>
+                    <th scope="col">Век создания</th>
+                    <th scope="col">Категория текста</th>
+                    <th scope="col">Средняя длина предложения</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for text in texts %}
+                <tr>
+                    <td>{{ text.title }}</td>
+                    <td>{{ text.time_period }}</td>
+                    <td>{{ text.category }}</td>
+                    <td>{{ text.avg_sentence_length }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}

@@ -1,3 +1,7 @@
 #!/bin/bash
+
 source textura_env/bin/activate
-python run.py
+
+python textura_site/manage.py migrate 
+
+python textura_site/manage.py runserver
