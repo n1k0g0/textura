@@ -10,7 +10,7 @@ import math
 from string import punctuation
 
 from random import sample
-from .models import CorporaEntityData, CorpusEntityData
+from .models import CorpusEntityData
 from transformers import pipeline
 from nltk import download
 from nltk.corpus import stopwords

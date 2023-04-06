@@ -8,8 +8,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 
 
-from .models import CorporaEntityData, UploadedText, CorpusEntityData, FiltersModel
-from .forms import CorporaEntityForm, UploadTextForm, CorpusEntityForm, FiltersForm
+from .models import  UploadedText, CorpusEntityData, FiltersModel
+from .forms import  UploadTextForm, CorpusEntityForm, FiltersForm
 
 
 

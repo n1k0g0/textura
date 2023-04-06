@@ -1,6 +1,9 @@
 textura_env
 mac-install.sh
 .DS_Store
-textura_site/db.sqlite3
+textura_site/db2.sqlite3
+textura_site/db.sqlite3.csv
+textura_site/source.csv
+source.csv
 textura_site/env
 sqlite_populate.txt
