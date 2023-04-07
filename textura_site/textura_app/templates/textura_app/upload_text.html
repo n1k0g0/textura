@@ -53,7 +53,7 @@
                             <div class="collapse" id="collapseExample">
                                 <div class="card-body">
                                     {% for field in form %}
-                                    {% if field.label != "Файл" %}
+                                    {% if field.label != "Файл" and field.label != "IP" %}
                                     <div class="fieldWrapper fieldWrapper-custom my-1">
                                         {{ field.errors }}
                                         {{ field.label_tag }} {{ field }}
