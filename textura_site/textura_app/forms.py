@@ -1,21 +1,7 @@
 from django import forms
-from .models import CorporaEntityData, UploadedText, CorpusEntityData, FiltersModel
-from django.core.exceptions import ValidationError
+from .models import  UploadedText, CorpusEntityData, FiltersModel
  
- 
-# creating a form
-class CorporaEntityForm(forms.ModelForm):
-    # create meta class
-    class Meta:
-        # specify model to be used
-        model = CorporaEntityData
- 
-        # specify fields to be used
-        fields = [
-            "title",
-            "time_period",
-            "category"
-        ]
+
 
 class CorpusEntityForm(forms.ModelForm):
     # create meta class
@@ -64,11 +50,41 @@ class UploadTextForm(forms.ModelForm):
 class FiltersForm(forms.ModelForm):
     class Meta:
         model = FiltersModel
-        fields = ['author', 'category', 'time_period']
+        fields = [
+            "author", 
+            "category", 
+            "time_period",
+            "created",
+            "genre_fi",
+            "texttype",
+            "topic",
+            "chronotop",
+            "style",
+            "subcorpus"
+            ]
         labels = {
-        "author": "Автор",
-        "category": "Категория",
-        "time_period": "Век создания"
+            "author": "Автор",
+            "category": "Категория",
+            "time_period": "Век создания",
+            "created": "Год создания",
+            "genre_fi": "Жанр",
+            "texttype": "Тип текста",
+            "topic": "Тема",
+            "chronotop": "Создан в",
+            "style": "Стиль текста",
+            "subcorpus": "Подкорпус" 
+        }
+        widgets = {
+            'author': forms.TextInput(attrs={'placeholder': 'А. С. Пушкин'}),
+            'category': forms.TextInput(attrs={'placeholder': 'Письма'}),
+            'time_period': forms.TextInput(attrs={'placeholder': 'xix'}),
+            'created': forms.TextInput(attrs={'placeholder': '1836'}),
+            'genre_fi': forms.TextInput(attrs={'placeholder': 'историческая проза'}),
+            'texttype': forms.TextInput(attrs={'placeholder': 'монография'}),
+            'topic': forms.TextInput(attrs={'placeholder': 'история'}),
+            'chronotop': forms.TextInput(attrs={'placeholder': 'Россия: XVIII век'}),
+            'style': forms.TextInput(attrs={'placeholder': 'официальный'}),
+            'subcorpus': forms.TextInput(attrs={'placeholder': 'ПК письменных текстов'}),
         }
     def clean(self):
         super(FiltersForm, self).clean()

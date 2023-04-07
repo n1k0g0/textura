@@ -20,13 +20,21 @@ class CorporaEntityData(models.Model):
 
 class CorpusEntityData(models.Model):
     id = models.IntegerField(primary_key=True, unique=True, blank=False)
-    corpus_id = models.IntegerField()
     path = models.CharField(max_length = 200)
     title = models.CharField(max_length = 200)
 
     time_period = models.CharField(max_length = 50)
-    category = models.TextField()
-    author = models.TextField()
+    category = models.CharField(max_length = 200)
+    author = models.CharField(max_length = 200)
+
+    header = models.TextField() 
+    created = models.CharField(max_length=200)
+    genre_fi = models.CharField(max_length=200)
+    texttype = models.CharField(max_length=200)
+    topic = models.CharField(max_length=200)
+    chronotop = models.CharField(max_length=200)
+    style = models.CharField(max_length=200)
+    subcorpus = models.CharField(max_length=200)
 
     #block basic
     avg_sentence_length = models.FloatField(default=None, blank=True, null=True) 
@@ -132,6 +140,15 @@ class FiltersModel(models.Model):
     time_period = models.CharField(max_length = 50, default=None, blank=True, null=True)
     category = models.CharField(max_length = 50, default=None, blank=True, null=True)
     author = models.CharField(max_length = 100, default=None, blank=True, null=True)
+
+    
+    created = models.CharField(max_length=200, default=None, blank=True, null=True)
+    genre_fi = models.CharField(max_length=200, default=None, blank=True, null=True)
+    texttype = models.CharField(max_length=200, default=None, blank=True, null=True)
+    topic = models.CharField(max_length=200, default=None, blank=True, null=True)
+    chronotop = models.CharField(max_length=200, default=None, blank=True, null=True)
+    style = models.CharField(max_length=200, default=None, blank=True, null=True)
+    subcorpus = models.CharField(max_length=200, default=None, blank=True, null=True)
 
     class Meta:
         app_label = 'textura_app'

@@ -3,11 +3,6 @@ from .metrics import PreprocessedText
 from .utils import prepare_charts
 from django.http import HttpResponse, HttpResponseRedirect
 
-
-
-
-
-
 from .models import  UploadedText, CorpusEntityData, FiltersModel
 from .forms import  UploadTextForm, CorpusEntityForm, FiltersForm
 
@@ -70,22 +65,6 @@ def process_text(text):
     text.blanchefort_negative = preprocessed_text.blanchefort_negative
     text.save()
 
-
-# def process(request):
-#     if request.method == 'GET':
-#            print(request)
-#            text_id = request.GET['text_id']
-#            text = get_object_or_404(UploadedText, pk=text_id)
-#            # likedpost = Post.objects.get(pk=text_id) #getting the liked posts
-#            process_text(text)
-#            #m = Like(post=likedpost) # Creating Like Object
-#            #m.save()  # saving it to store in database
-#            return HttpResponse("Success!") # Sending an success response
-#     else:
-#            return HttpResponse("Request method is not a GET")
-
-
-
     
 
 
@@ -112,10 +91,7 @@ def analysis_graphs(request):
 
 def analysis(request):
     texts = UploadedText.objects.all()
-    # filters_values_list = FiltersModel.objects.values()
-    # plot_div = prepare_charts(filters_values_list, texts)
     for text in texts:
-        # print(text.avg_sentence_length)
         if None in [
             text.avg_sentence_length,
             text.type_token_ratio,
@@ -200,7 +176,6 @@ def update_filters(request):
         
         if form.is_valid():
             form_mutable = form.save(commit=False)
-            # print(form_mutable.file.path)
             if form_mutable.time_period == None:
                 form_mutable.time_period = '-'
             if form_mutable.author == None:
