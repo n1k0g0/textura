@@ -22,6 +22,9 @@ def show_corpora(request):
     texts = CorpusEntityData.objects.all()[0:1000]
     return render(request, 'textura_app/show_corpora.html', {'texts': texts})
 
+def manual(request):
+    return render(request, 'textura_app/manual.html')
+
 
 
 

@@ -93,9 +93,7 @@
     {% for text in texts %}
     <div class="col-12">
         <h2>Анализ текста
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
-            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
-          </svg>
+          
         </h2>
         
                   <table class="table">
@@ -103,37 +101,47 @@
                         <tr>
                             <th scope="col">
                               <div class="fs-6">Ср. длина предложения
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill text-white mb-1" viewBox="0 0 16 16">
-                                  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
-                                </svg>
+                                <a class="text-white"  role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Приведено среднее значение и среднеквадратичное отклонение"
+                        data-bs-custom-class="custom-tooltip">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill text-white mb-1" viewBox="0 0 16 16">
+                                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                  </svg>
+                                </a>
                               </div>
                             </th>
                             <th scope="col">
                               <div class="fs-6">Медиана длины предложений
+                                <a class="text-white"  role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Приведены медиана и межквартильный размах"
+                        data-bs-custom-class="custom-tooltip">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill text-white mb-1" viewBox="0 0 16 16">
                                   <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
                                 </svg>
+                                </a>
                               </div>
                             </th>
                             <th scope="col">
                               <div class="fs-6">Ср. длина слов
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill text-white mb-1" viewBox="0 0 16 16">
-                                  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
-                                </svg>
+                                <a class="text-white"  role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Приведено среднее значение и среднеквадратичное отклонение"
+                        data-bs-custom-class="custom-tooltip">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill text-white mb-1" viewBox="0 0 16 16">
+                                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                  </svg>
+                                </a>
                               </div>
                             </th>
                             <th scope="col">
                               <div class="fs-6">Медиана длины слов
+                                <a class="text-white"  role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Приведены медиана и межквартильный размах"
+                        data-bs-custom-class="custom-tooltip">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill text-white mb-1" viewBox="0 0 16 16">
                                   <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
                                 </svg>
+                                </a>
                               </div>
                             </th> 
                             <th scope="col">
                               <div class="fs-6">Ср. кол-во слогов в словах
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill text-white mb-1" viewBox="0 0 16 16">
-                                  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
-                                </svg>
+                                
                               </div>
                             </th>
                         </tr>
@@ -174,16 +182,22 @@
                         <tr>
                             <th scope="col">
                               <div class="fs-6">Коэф. лексического разнообразия
+                                <a class="text-white"  role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Отношение числа лемм к количеству их употреблений в тексте"
+                        data-bs-custom-class="custom-tooltip">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill text-white mb-1" viewBox="0 0 16 16">
                                   <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
                                 </svg>
+                                </a>
                               </div>
                             </th>
                             <th scope="col">
                               <div class="fs-6">Коэф. лексической плотности
+                                <a class="text-white"  role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Отношение числа лемм неслужебных частей речи к количеству их употреблений в тексте"
+                        data-bs-custom-class="custom-tooltip">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill text-white mb-1" viewBox="0 0 16 16">
                                   <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
                                 </svg>
+                                </a>
                               </div>
                             </th>
                         </tr>
@@ -215,44 +229,62 @@
                         <tr>
                             <th scope="col">
                               <div class="fs-6">Кол-во многосложных слов
+                                <a class="text-white"  role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Учитываются слова с более чем двумя слогами"
+                        data-bs-custom-class="custom-tooltip">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill text-white mb-1" viewBox="0 0 16 16">
                                   <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
                                 </svg>
+                                </a>
                               </div>
                             </th>
                             <th scope="col">
                               <div class="fs-6">Индекс удобочитаемости
+                                <a class="text-white"  role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Мера определения сложности восприятия текста читателем"
+                        data-bs-custom-class="custom-tooltip">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill text-white mb-1" viewBox="0 0 16 16">
                                   <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
                                 </svg>
+                                </a>
                               </div>
                             </th>
                             <th scope="col">
                               <div class="fs-6">FRES
+                                <a class="text-white"  role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Автоматический индекс удобочитаемости"
+                        data-bs-custom-class="custom-tooltip">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill text-white mb-1" viewBox="0 0 16 16">
                                   <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
                                 </svg>
+                                </a>
                               </div>
                             </th>
                             <th scope="col">
                               <div class="fs-6">Gunning Fog
+                                <a class="text-white"  role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Автоматический индекс удобочитаемости"
+                        data-bs-custom-class="custom-tooltip">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill text-white mb-1" viewBox="0 0 16 16">
                                   <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
                                 </svg>
+                                </a>
                               </div>
                             </th>
                             <th scope="col">
                               <div class="fs-6">SMOG
+                                <a class="text-white"  role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Автоматический индекс удобочитаемости"
+                        data-bs-custom-class="custom-tooltip">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill text-white mb-1" viewBox="0 0 16 16">
                                   <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
                                 </svg>
+                                </a>
                               </div>
                             </th>
                             <th scope="col">
                               <div class="fs-6">CLI
+                                <a class="text-white"  role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Автоматический индекс удобочитаемости"
+                        data-bs-custom-class="custom-tooltip">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill text-white mb-1" viewBox="0 0 16 16">
                                   <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
                                 </svg>
+                                </a>
                               </div>
                             </th>
                         </tr>
@@ -299,23 +331,32 @@
                         <tr>
                             <th scope="col">
                               <div class="fs-6">Ср. позитивная оценка
+                                <a class="text-white"  role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Средняя позитивная оценка по предложениям модели DeepPavlov/rubert-base-cased-conversational"
+                        data-bs-custom-class="custom-tooltip">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill text-white mb-1" viewBox="0 0 16 16">
                                   <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
                                 </svg>
+                                </a>
                               </div>
                             </th>
                             <th scope="col">
                               <div class="fs-6">Ср. нейтральная оценка
+                                <a class="text-white"  role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Средняя нейтральная оценка по предложениям модели DeepPavlov/rubert-base-cased-conversational"
+                        data-bs-custom-class="custom-tooltip">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill text-white mb-1" viewBox="0 0 16 16">
                                   <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
                                 </svg>
+                                </a>
                               </div>
                             </th>
                             <th scope="col">
                               <div class="fs-6">Ср. негативная оценка
+                                <a class="text-white"  role="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Средняя негативная оценка по предложениям модели DeepPavlov/rubert-base-cased-conversational"
+                        data-bs-custom-class="custom-tooltip">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill text-white mb-1" viewBox="0 0 16 16">
                                   <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
                                 </svg>
+                                </a>
                               </div>
                             </th>
                         </tr>

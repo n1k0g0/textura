@@ -9,6 +9,7 @@ from . import views
 urlpatterns = [
     path('show_corpora', views.show_corpora, name='show_corpora'),
     path('analysis', views.analysis, name='analysis'),
+    path('manual', views.manual, name='manual'),
     path('analysis_graphs', views.analysis_graphs, name='analysis_graphs'),
     path('', views.upload_text, name='upload_text'),
     path('delete/<int:pk>/', views.delete_text, name='delete_text'),
